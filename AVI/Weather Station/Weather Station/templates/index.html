@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Station</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #020617;
+            color: #e5e7eb;
+        }
+        .acard{width: fit-content;height: fit-content;}
+        .card {text-align: left;
+            background: #0f172a;
+            padding: 10px;
+            margin: 20px auto;
+            width: fit-content;
+            border-radius: 12px;
+            height: fit-content;
+            float: inline-start;
+        }
+        h1 { color: #38bdf8;text-align: center }
+        .temp{font-size:50px ;}
+        .Tempclass{width: 49%;padding: 5px;float: left;height: fit-content;
+
+        }
+        .weatherSTAT{text-align: left;width: 40%;height: fit-content;padding: 5px;float: right;}
+        .date{text-align: center;color: azure;}
+        .forecast-container {
+        width: fit-content;
+        height: fit-content;
+    }
+    .forecast-card {
+        background: #020617;
+        border: 1px solid #1e293b;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 8px;
+        width: 170px;
+        font-size: 14px;
+        float: left;
+        width: fit-content;
+        height: fit-content;
+    }
+    .forecast-card .title {
+        color: #38bdf8;
+        font-weight: bold;
+        text-align: left;
+    }
+    </style>
+</head>
+<script>
+    // Refresh page every 2 minutes (120000 ms)
+    setTimeout(function () {
+        window.location.reload();
+    }, 120000);
+</script>
+<body>
+    <h1>Weather Station</h1>
+    <aside class="Tempclass">
+        <p class="temp">{{ current_temperature_2m }} °C</p>
+        <p class="ap_temp">Feels like {{today_apparent_temperature_max}} °C</p>
+
+    </aside>
+    <article class="weatherSTAT">
+        <p> Current Weather Status:</p>
+        <p> {{current_weather_code}}</p>
+    </article>
+    <br>
+    <aside class="acard">
+            
+        <section class="forecast-container">
+        {% for d in daily_cards %}
+        <div class="forecast-card">
+            <div class="title">
+                {{ d.day }} {{ d.date }} {{ d.month }}
+                <br>({{ d.label }})
+            </div>
+            <p>{{ d.weather }}</p>
+            <p>🌡temp: {{ d.t_min }}°C – {{ d.t_max }}°C</p>
+            <p>🌧 rain:{{ d.rain }} mm</p>
+            
+            <p>☔Precipitation Chances {{ d.precip_prob }} %</p>
+        </div>
+    {% endfor %}
+    </section>
+    </aside> 
+</body>
+</html>
